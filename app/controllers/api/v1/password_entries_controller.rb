@@ -1,14 +1,19 @@
 class Api::V1::PasswordEntriesController < Api::V1::BaseController
-  before_action :find_password_entry, except: [:create]
+  before_action :find_password_entry, except: [:index, :create]
+
+  def index
+    render json: current_account.password_entries.to_json(only: [:id, :site_name])
+  end
 
   def show
     @entry.master_password = Account::HARDCODED_PASSWORD
-    respond_with @entry
+    respond_with @entry.to_json(only: [:site_name, :site_url, :username],
+                                methods: [:decrypted_password])
   end
 
   def create
     @entry = current_account.password_entries.create(entry_params)
-    respond_with :api, :v1, @entry
+    render json: @entry.to_json(only: [:id, :site_name])
   end
 
   def update

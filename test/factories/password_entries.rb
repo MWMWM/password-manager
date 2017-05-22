@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :password_entry do
-    site_name 'MySiteName'
-    site_url 'MySiteUrl'
+    sequence(:site_name) {|n| "MySiteName #{n}" }
+    sequence(:site_url) {|n| "MySiteUrl #{n}" }
     username 'MyUsername'
     raw_password 'MyPassword'
     account

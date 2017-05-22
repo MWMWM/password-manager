@@ -30,9 +30,4 @@ class PasswordEntry < ApplicationRecord
     decipher.iv = Base64.decode64(iv)
     decipher.update(Base64.decode64(password_encrypted)) + decipher.final
   end
-
-  def as_json(_options)
-    super(only: [:site_name, :site_url, :username],
-          methods: [:decrypted_password])
-  end
 end
