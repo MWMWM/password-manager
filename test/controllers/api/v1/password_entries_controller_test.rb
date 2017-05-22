@@ -5,15 +5,13 @@ class Api::V1::PasswordEntriesControllerTest < ActionController::TestCase
     @account = FactoryGirl.create :account
     @password_entry = FactoryGirl.create :password_entry, account: @account
     @password_entry_params = FactoryGirl.attributes_for(:password_entry)
-    request.headers['Username'] = @account.username
-    request.headers['Password'] = 'MasterPassword'
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(Account::HARDCODED_USERNAME, Account::HARDCODED_PASSWORD)
   end
 
   test 'must not show password_entry if not providing auth data' do
-    request.headers['Password'] = 'AnotherPassword'
+    request.env['HTTP_AUTHORIZATION'] = ''
     get :show, params: { id: @password_entry.id }, format: :json
     assert_response 401
-    assert_equal response.body, { errors: 'Not authenticated' }.to_json
   end
 
   test 'must show password_entry if auth data provided' do

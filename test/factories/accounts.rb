@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :account do
-    username 'MyUsername'
-    password 'MasterPassword'
+    username Account::HARDCODED_USERNAME
+    password Account::HARDCODED_PASSWORD
   end
 end

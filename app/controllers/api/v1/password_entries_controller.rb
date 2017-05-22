@@ -2,7 +2,7 @@ class Api::V1::PasswordEntriesController < Api::V1::BaseController
   before_action :find_password_entry, except: [:create]
 
   def show
-    @entry.master_password = request.headers['Password']
+    @entry.master_password = Account::HARDCODED_PASSWORD
     respond_with @entry
   end
 
@@ -29,6 +29,6 @@ class Api::V1::PasswordEntriesController < Api::V1::BaseController
   def entry_params
     p = params.require(:password_entry).permit(:site_name, :site_url,
                                                :username, :raw_password)
-    p.merge(master_password: request.headers['Password'])
+    p.merge(master_password: Account::HARDCODED_PASSWORD)
   end
 end

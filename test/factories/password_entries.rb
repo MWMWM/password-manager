@@ -7,7 +7,7 @@ FactoryGirl.define do
     account
 
     after :build do |password_entry|
-      password_entry.master_password = 'MasterPassword'
+      password_entry.master_password = Account::HARDCODED_PASSWORD
     end
   end
 end
