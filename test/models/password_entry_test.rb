@@ -10,16 +10,17 @@ class PasswordEntryTest < ActiveSupport::TestCase
   end
 
   test 'encrypting' do
+    iv = @password_entry.iv
+    password_encrypted = @password_entry.password_encrypted
     @password_entry.raw_password = 'MyPass'
-    @password_entry.encrypt('MasterPassword')
-    assert_not_equal @password_entry.iv, 'MyIv'
-    assert_not_equal @password_entry.password_encrypted, 'MyPassword'
+    @password_entry.encrypt
+    assert_not_equal @password_entry.iv, iv
+    assert_not_equal @password_entry.password_encrypted, password_encrypted
   end
 
   test 'decrypting encrypted password must return initial plain password' do
     @password_entry.raw_password = 'MyPass'
-    @password_entry.encrypt('MasterPassword')
-    plain = @password_entry.decrypt('MasterPassword')
-    assert_equal plain, 'MyPass'
+    @password_entry.encrypt
+    assert_equal @password_entry.decrypted_password, 'MyPass'
   end
 end

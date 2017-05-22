@@ -1,10 +1,13 @@
 FactoryGirl.define do
   factory :password_entry do
-    site_name 'MySiteUrl'
+    site_name 'MySiteName'
     site_url 'MySiteUrl'
     username 'MyUsername'
-    password_encrypted 'MyPassword'
-    iv 'MyIv'
+    raw_password 'MyPassword'
     account
+
+    after :build do |password_entry|
+      password_entry.master_password = 'MasterPassword'
+    end
   end
 end
