@@ -1,6 +1,6 @@
 class Account < ApplicationRecord
-  HARDCODED_USERNAME = 'myaccount'
-  HARDCODED_PASSWORD = 'MySuperSecureAndLongPassword:)'
+  HARDCODED_USERNAME = ENV['HARDCODED_USERNAME']
+  HARDCODED_PASSWORD = ENV['HARDCODED_PASSWORD']
 
   has_secure_password
 

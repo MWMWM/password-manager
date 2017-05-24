@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'responders'
 gem 'react-rails'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'capybara', '~> 2.13'
