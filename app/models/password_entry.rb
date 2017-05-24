@@ -6,6 +6,8 @@ class PasswordEntry < ApplicationRecord
 
   validates :site_name, :site_url, :username, :password_encrypted, :iv,
             presence: true
+  validates :username,
+            uniqueness: { scope: [:account_id, :site_name] }
 
   before_validation :encrypt
 

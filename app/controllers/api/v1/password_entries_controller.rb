@@ -2,7 +2,8 @@ class Api::V1::PasswordEntriesController < Api::V1::BaseController
   before_action :find_password_entry, except: [:index, :create]
 
   def index
-    render json: current_account.password_entries.to_json(only: [:id, :site_name])
+    render json: current_account.password_entries.
+      to_json(only: [:id, :site_name, :username])
   end
 
   def show

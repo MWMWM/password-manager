@@ -13,17 +13,15 @@ var Main = React.createClass({
         self.setState({ entries: data });
       },
       error: function(xhr, status, error) {
-        alert('Cannot get data from API: ', error);
+        console.log('Cannot get data from API: ', error);
       }
     });
   },
   render: function() {
     return(
-      <div className="container">
+      <div className='container'>
         <h1>Your passwords</h1>
-        <div>
-            <PasswordEntriesList entries={this.state.entries} />
-        </div>
+        <EntriesList entries={this.state.entries} />
       </div>
     )
   }

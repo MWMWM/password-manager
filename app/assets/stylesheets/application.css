@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+.container {
+  padding: 50px;
+}
+h1 {
+  padding-left: 50px;
+}
+a.clickable {
+  cursor: pointer;
+  display: block;
+}
+.col2 {
+  display: inline-block;
+  width: 50%;
+}
+.basics, .additional {
+  display: inline-block;
+}
+.basics {
+  width: 30%;
+}
+.additional {
+  width: 70%;
+}
+.header{
+  padding: 20px;
+}
+.entry {
+  padding: 5px;
+}
+.entry:nth-child(even) {
+  background: #e5ebfc;
+}
