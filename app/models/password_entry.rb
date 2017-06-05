@@ -32,13 +32,4 @@ class PasswordEntry < ApplicationRecord
     decipher.iv = Base64.decode64(iv)
     decipher.update(Base64.decode64(password_encrypted)) + decipher.final
   end
-
-  def new_sharing_token
-    password = decrypted_password
-    token = SecureRandom.uuid.gsub(/\-/,'')
-    #encrypt it with generated token
-    #save encrypted password and creation time
-    #sent id and generated token
-    token
-  end
 end

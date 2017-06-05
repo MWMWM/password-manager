@@ -8,13 +8,12 @@ var EntriesList = React.createClass({
       <div className='entries'>
         <div className='header'>
           <div className='basics'>
-            <div className='col50'>Site name</div>
-            <div className='col50'>Username</div>
+            <div className='col2'>Site name</div>
+            <div className='col2'>Username</div>
           </div>
           <div className='additional'>
-            <div className='col20'>Site url</div>
-            <div className='col40'>Password</div>
-            <div className='col40'>SharingUrl</div>
+            <div className='col2'>Site url</div>
+            <div className='col2'>Password</div>
           </div>
         </div>
         {entries}

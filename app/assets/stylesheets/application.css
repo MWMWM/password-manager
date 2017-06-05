@@ -23,17 +23,9 @@ a.clickable {
   cursor: pointer;
   display: block;
 }
-.col50 {
+.col2 {
   display: inline-block;
   width: 50%;
-}
-.col20 {
-  display: inline-block;
-  width: 20%;
-}
-.col40 {
-  display: inline-block;
-  width: 40%;
 }
 .basics, .additional {
   display: inline-block;
