@@ -27,7 +27,7 @@ class Api::V1::PasswordEntriesControllerTest < ActionController::TestCase
     get :show, params: { id: @password_entry.id }, format: :json
     assert_response :success
     assert_equal response.body,
-                 @password_entry.to_json(only: [:site_name, :site_url, :username],
+                 @password_entry.to_json(only: [:id, :site_name, :site_url, :username],
                                          methods: [:decrypted_password])
   end
 
@@ -63,5 +63,25 @@ class Api::V1::PasswordEntriesControllerTest < ActionController::TestCase
     end
     assert_response :success
     assert_empty response.body
+  end
+
+  test 'must generate sharing' do
+    get :generate_sharing,
+        params: { id: @password_entry.id },
+        format: :json
+    assert_response :success
+    assert_equal response.body, @password_entry.to_json(only: [:id],
+                                                        methods: [:sharing_token])
+  end
+
+  test 'must get data from sharing' do
+    sharing_token = @password_entry.sharing_token
+    get :use_sharing,
+        params: { id: @password_entry.id, sharing_token: sharing_token }
+    assert_response :success
+    assert_equal response.body, @password_entry.to_json(only: [:id],
+                                                        methods: [:password_from_sharing])
+    assert_equal response.body, @password_entry.to_json(only: [:id],
+                                                        methods: [:decrypted_password])
   end
 end
