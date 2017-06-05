@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522090758) do
+ActiveRecord::Schema.define(version: 20170605123456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,4 +34,13 @@ ActiveRecord::Schema.define(version: 20170522090758) do
     t.index ["account_id"], name: "index_password_entries_on_account_id"
   end
 
+  create_table "sharings", force: :cascade do |t|
+    t.string "encrypted_password"
+    t.bigint "password_entry_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["password_entry_id"], name: "index_sharings_on_password_entry_id"
+  end
+
+  add_foreign_key "sharings", "password_entries"
 end

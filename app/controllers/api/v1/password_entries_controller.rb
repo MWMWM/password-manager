@@ -8,7 +8,7 @@ class Api::V1::PasswordEntriesController < Api::V1::BaseController
 
   def show
     @entry.master_password = Account::HARDCODED_PASSWORD
-    respond_with @entry.to_json(only: [:site_name, :site_url, :username],
+    respond_with @entry.to_json(only: [:id, :site_name, :site_url, :username],
                                 methods: [:decrypted_password])
   end
 
@@ -24,6 +24,10 @@ class Api::V1::PasswordEntriesController < Api::V1::BaseController
 
   def destroy
     respond_with @entry.destroy
+  end
+
+  def generate_sharing
+    render json: @entry.to_json(only: [:id], methods: [:new_sharing_token])
   end
 
   private
