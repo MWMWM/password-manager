@@ -6,11 +6,7 @@ Rails.application.routes.draw do
       resources :password_entries, only: [:index, :create, :show, :update, :destroy] do
         member do
           get :generate_sharing
-        end
-        resource :sharings, only: [] do
-          member do
-            get :use
-          end
+          get :use_sharing
         end
       end
     end

@@ -27,7 +27,18 @@ class Api::V1::PasswordEntriesController < Api::V1::BaseController
   end
 
   def generate_sharing
-    render json: @entry.to_json(only: [:id], methods: [:new_sharing_token])
+    @entry.master_password = Account::HARDCODED_PASSWORD
+    @entry.encrypt_sharing_password unless @entry.sharing_password_encrypted.present?
+    render json: @entry.to_json(only: [:id], methods: [:generate_sharing_token])
+  end
+
+  def use_sharing
+    @entry.sharing_token = params[:token]
+    if @entry.valid_token?
+      render json: @entry.to_json(methods: [:decrypted_shared_password])
+    else
+      render json: { error: 'invalid token' }
+    end
   end
 
   private
